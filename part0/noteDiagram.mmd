@@ -7,7 +7,7 @@ sequenceDiagram
     server-->>browser: 302 Peticion de redirect
     deactivate server
 
-    Aqui el servidor devuelve una peticion de redirect que el browser ejecutara en la siguiente accion
+    Note over browser, server: Aqui el servidor devuelve una peticion de redirect que el browser ejecutara en la siguiente accion
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
@@ -24,7 +24,11 @@ sequenceDiagram
     server-->>browser: the JavaScript file
     deactivate server
 
+    Note over browser: El navegador ejecuta el código JS que solicita el JSON con los datos
+
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
     server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
     deactivate server
+
+    Note over browser: El navegador ejecuta el callback que renderiza las notas en el DOM

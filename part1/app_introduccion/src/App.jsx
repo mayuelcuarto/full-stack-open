@@ -27,6 +27,7 @@ const App = () => {
 }
 */
 
+/* Segundo ejercicio de introduccion modificado
 const Display = ({counter}) => <div>{counter}</div>
 
 const Button = ({onSmash, text}) => <button onClick={onSmash}>{text}</button>
@@ -35,12 +36,12 @@ const App = () => {
   const[counter, setCounter] = useState(0)
   console.log('rendering with counter value', counter)
 
-  /*setTimeout(
-    () => setCounter(counter + 1),
-    1000
-  )
+  //setTimeout(
+    //() => setCounter(counter + 1),
+    //1000
+  //)
     
-  console.log('rendering...', counter)*/
+  console.log('rendering...', counter)
 
   const increaseByOne = () => {
     console.log('increasing, value before', counter)
@@ -73,5 +74,63 @@ const App = () => {
     </div>
   )
 }
+*/
+
+const App = () => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+  const [total, setTotal] = useState(0)
+
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    const updatedLeft = left + 1
+    setLeft(updatedLeft)
+    setTotal(updatedLeft + right)
+  }
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    const updatedRight = right + 1
+    setRight(updatedRight)
+    setTotal(updatedRight + left)
+  }
+
+  return (
+    <div>
+      {left}
+      <button onClick={handleLeftClick}>
+        left
+      </button>
+      <button onClick={handleRightClick}>
+        right
+      </button>
+      {right}
+      <p>{allClicks.join(' ')}</p>
+      <p>total {total}</p>
+    </div>
+  )
+}
+
+/*
+const App = () => {
+  const [clicks, setClicks] = useState({
+    left: 0, right: 0
+  })
+
+  const handleLeftClick = () => setClicks({ ...clicks, left: clicks.left + 1 })
+
+  const handleRightClick = () => setClicks({ ...clicks, right: clicks.right + 1 })
+
+  return (
+    <div>
+      {clicks.left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {clicks.right}
+    </div>
+  )
+}
+  */
 
 export default App

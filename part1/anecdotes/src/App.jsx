@@ -16,15 +16,25 @@ const App = () => {
 
   const [selected, setSelected] = useState(0)
 
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
+
   const generarAleatorio = () => {
     const enteroAleatorio = Math.floor(Math.random() * anecdotes.length)
-    console.log(enteroAleatorio)
     setSelected(enteroAleatorio)
+  }
+
+  const votar = () => {
+    const copy = [...votes]
+    copy[selected] += 1
+    setVotes(copy)
+    console.log(selected, votes)
   }
 
   return (
     <div>
       <h4>{anecdotes[selected]}</h4>
+      <h5>has {votes[selected]} votes</h5>
+      <Button onClick={votar} text="vote" />
       <Button onClick={generarAleatorio} text="next anecdote" />
     </div>
   )

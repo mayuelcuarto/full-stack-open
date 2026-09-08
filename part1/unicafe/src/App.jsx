@@ -1,16 +1,26 @@
 import { useState } from 'react'
 
-const Display = ({text, counter, unit}) => <div>{text} {counter} {unit}</div>
+const Display = ({ text, counter, unit }) => <div>{text} {counter} {unit}</div>
 
-const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 
 const Statistics = (props) => {
   const total = props.good + props.neutral + props.bad
-  // En esta parte agregue una condicional para total y asi evitar el NaN al cargar la pagina
-  const average = total === 0 ? 0 : (props.good * 1 + props.bad * -1) / total
-  const positive = total === 0 ? 0 : (props.good * 100) / total
 
-  return(
+  if (total === 0) {
+    return (
+      <div>
+        <h1>statistics</h1>
+        <div>No feedback given</div>
+      </div>
+    )
+  }
+
+  // Ahora que hay un if previo quite la condicional de esta parte
+  const average = (props.good * 1 + props.bad * -1) / total
+  const positive = (props.good * 100) / total
+
+  return (
     <div>
       <h1>statistics</h1>
       <Display text="good" counter={props.good} />
@@ -28,7 +38,7 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
-  
+
   const increaseGoodByOne = () => {
     console.log('increasing, value before', good)
     setGood(good + 1)

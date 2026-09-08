@@ -76,6 +76,7 @@ const App = () => {
 }
 */
 
+/* Tercer ejercicio
 const History = (props) => {
   if (props.allClicks.length === 0) {
     return (
@@ -127,9 +128,9 @@ const App = () => {
     </div>
   )
 }
+*/
 
-
-/*
+/* Variante de tercer ejercicio
 const App = () => {
   const [clicks, setClicks] = useState({
     left: 0, right: 0
@@ -149,5 +150,16 @@ const App = () => {
   )
 }
 */
+
+const App = () => {
+  const [value, setValue] = useState(10)
+
+  return (
+    <div>
+      {value}
+      <button>reset to zero</button>
+    </div>
+  )
+}
 
 export default App

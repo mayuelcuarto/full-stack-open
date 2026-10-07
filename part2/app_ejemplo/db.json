@@ -3,12 +3,12 @@
     {
       "id": "1",
       "content": "HTML is easy",
-      "important": true
+      "important": false
     },
     {
       "id": "2",
       "content": "Browser can execute only JavaScript",
-      "important": false
+      "important": true
     },
     {
       "id": "3",
@@ -17,7 +17,7 @@
     },
     {
       "content": "Prueba de Nota",
-      "important": false,
+      "important": true,
       "id": "ffGvNSMT6c0"
     },
     {
@@ -27,7 +27,7 @@
     },
     {
       "content": "Test de otra nota",
-      "important": true,
+      "important": false,
       "id": "SxvkULh_QRc"
     }
   ],

@@ -29,6 +29,11 @@
       "content": "Test de otra nota",
       "important": false,
       "id": "SxvkULh_QRc"
+    },
+    {
+      "content": "Prueba de nueva nota",
+      "important": false,
+      "id": "1oEqWqNw9Nk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

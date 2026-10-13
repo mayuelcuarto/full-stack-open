@@ -24,7 +24,24 @@ const App = () => {
     event.preventDefault()
 
     if (persons.some(person => person.name === newName)) {
-      alert(`${newName} is already added to phonebook`)
+      const person = persons.find(n => n.name === newName)
+      const changedPerson = { ...person, number: newNumber }
+
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
+        personService
+        .update(person.id, changedPerson)
+        .then(returnedPerson => {
+          setPersons(persons.map(p => p.id !== person.id ? p : returnedPerson))
+          setNewName('')
+          setNewNumber('')
+        })
+        .catch(error => {
+          alert(
+            `the person '${person.name}' was already deleted from server`
+          )
+          setPersons(persons.filter(p => p.id !== person.id))
+        })
+      }
       return
     }
 

@@ -57,6 +57,21 @@ const App = () => {
     setFilter(event.target.value)
   }
 
+  const eliminatePerson = (id) => {
+    const person = persons.find(p => p.id === id)
+    if (window.confirm(`Delete ${person ? person.name : 'this person'}?`)) {
+      personService
+        .eliminate(id)
+        .then(() => {
+          setPersons(persons.filter(p => p.id !== id))
+        })
+        .catch(error => {
+          alert(`Information of ${person.name} has already been removed from server`)
+          setPersons(persons.filter(p => p.id !== id))
+        })
+    }
+  }
+
   const personsToShow = persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
 
   return (
@@ -68,7 +83,7 @@ const App = () => {
         newName={newName} handleNameChange={handleNameChange}
         newNumber={newNumber} handleNumberChange={handleNumberChange} />
       <h2>Numbers</h2>
-      <Persons personsToShow={personsToShow} />
+      <Persons personsToShow={personsToShow} eliminatePerson={eliminatePerson} />
     </div>
   )
 }

@@ -1,5 +1,5 @@
-const Person = ({ person }) => {
-  return <li>{person.name} {person.number}</li>
+const Person = ({ person, eliminatePerson }) => {
+  return <li>{person.name} {person.number} <button onClick={eliminatePerson}>delete</button></li>
 }
 
 export default Person

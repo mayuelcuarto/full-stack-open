@@ -19,16 +19,6 @@
       "name": "Mary Poppendieck",
       "number": "39-23-6423122",
       "id": "4"
-    },
-    {
-      "id": "jCmpQBDpKIU",
-      "name": "Prueba en agenda",
-      "number": "51-45646546"
-    },
-    {
-      "name": "Prueba 2 de agenda",
-      "number": "75-5456465",
-      "id": "5IPTM8Qjcsg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

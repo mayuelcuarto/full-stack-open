@@ -37,20 +37,24 @@ const App = () => {
           setPersons(persons.map(p => p.id !== person.id ? p : returnedPerson))
           setNewName('')
           setNewNumber('')
+          setMessageType('success')
+          setMessage(
+            `Updated ${newName}`
+          )
+          setTimeout(() => {
+            setMessage(null)
+          }, 3000)
         })
         .catch(error => {
-          alert(
+          setPersons(persons.filter(p => p.id !== person.id))
+          setMessageType('error')
+          setMessage(
             `the person '${person.name}' was already deleted from server`
           )
-          setPersons(persons.filter(p => p.id !== person.id))
+          setTimeout(() => {
+            setMessage(null)
+          }, 3000)
         })
-        setMessageType('success')
-        setMessage(
-          `Updated ${newName}`
-        )
-        setTimeout(() => {
-          setMessage(null)
-        }, 3000)
       }
       return
     }
@@ -66,14 +70,14 @@ const App = () => {
         setPersons(persons.concat(returnedPerson))
         setNewName('')
         setNewNumber('')
+        setMessageType('success')
+        setMessage(
+          `Added ${newName}`
+        )
+        setTimeout(() => {
+          setMessage(null)
+        }, 3000)
       })
-    setMessageType('success')
-    setMessage(
-      `Added ${newName}`
-    )
-    setTimeout(() => {
-      setMessage(null)
-    }, 3000)
   }
 
   const handleNameChange = (event) => {
@@ -98,18 +102,25 @@ const App = () => {
         .eliminate(id)
         .then(() => {
           setPersons(persons.filter(p => p.id !== id))
+          setMessageType('alert')
+          setMessage(
+            `Deleted ${person.name}`
+          )
+          setTimeout(() => {
+            setMessage(null)
+          }, 3000)
         })
         .catch(error => {
-          alert(`Information of ${person.name} has already been removed from server`)
+          console.log('Si llega a la exception')
           setPersons(persons.filter(p => p.id !== id))
+          setMessageType('error')
+          setMessage(
+            `Information of ${person.name} has already been removed from server`
+          )
+          setTimeout(() => {
+            setMessage(null)
+          }, 3000)
         })
-      setMessageType('alert')
-      setMessage(
-        `Deleted ${person.name}`
-      )
-      setTimeout(() => {
-        setMessage(null)
-      }, 3000)
     }
   }
 

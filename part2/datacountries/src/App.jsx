@@ -29,10 +29,15 @@ const App = () => {
     country.name.common.toLowerCase().includes(filter.toLowerCase())
   )
 
+  const handleShow = (countryName) => {
+    console.log("País seleccionado:", countryName)
+    setFilter(countryName)
+  }
+
   return (
     <div>
       <p>find countries <input value={filter} onChange={handleFilterChange} /></p>
-      <Countries countriesToShow={countriesToShow} />
+      <Countries countriesToShow={countriesToShow} handleShow={handleShow} />
     </div>
   )
 }

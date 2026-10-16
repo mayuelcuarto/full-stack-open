@@ -1,6 +1,6 @@
 import Country from "./Country"
 
-const Countries = ({countriesToShow}) => {
+const Countries = ({countriesToShow, handleShow}) => {
   if (countriesToShow.length > 10) {
     return <p>Too many matches, specify another filter</p>
   }
@@ -21,10 +21,10 @@ const Countries = ({countriesToShow}) => {
           </div>
   }
 
-  if (countriesToShow.length > 1 && countriesToShow.length < 10){
+  if (countriesToShow.length > 1 && countriesToShow.length <= 10){
     return <ul>
             {countriesToShow.map((country) => (
-              <Country key={country.cca3} country={country} />
+              <Country key={country.cca3} country={country} handleShow={handleShow} />
             ))}
           </ul>
   }

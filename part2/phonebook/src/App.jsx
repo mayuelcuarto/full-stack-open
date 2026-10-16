@@ -3,12 +3,15 @@ import Persons from './components/Persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import personService from './services/persons'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [messageType, setMessageType] = useState('')
+  const [message, setMessage] = useState('')
 
   const hook = () => {
     personService
@@ -41,6 +44,13 @@ const App = () => {
           )
           setPersons(persons.filter(p => p.id !== person.id))
         })
+        setMessageType('success')
+        setMessage(
+          `Updated ${newName}`
+        )
+        setTimeout(() => {
+          setMessage(null)
+        }, 3000)
       }
       return
     }
@@ -57,6 +67,13 @@ const App = () => {
         setNewName('')
         setNewNumber('')
       })
+    setMessageType('success')
+    setMessage(
+      `Added ${newName}`
+    )
+    setTimeout(() => {
+      setMessage(null)
+    }, 3000)
   }
 
   const handleNameChange = (event) => {
@@ -86,6 +103,13 @@ const App = () => {
           alert(`Information of ${person.name} has already been removed from server`)
           setPersons(persons.filter(p => p.id !== id))
         })
+      setMessageType('alert')
+      setMessage(
+        `Deleted ${person.name}`
+      )
+      setTimeout(() => {
+        setMessage(null)
+      }, 3000)
     }
   }
 
@@ -94,6 +118,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification messageType={messageType} message={message} />
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
       <h2>add a new</h2>
       <PersonForm addPerson={addPerson} 

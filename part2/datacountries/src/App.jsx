@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import Countries from './components/Countries'
 import countryService from './services/countries'
+import.meta.env
 
 const App = () => {
   const [countries, setCountries] = useState(null)
   const [filter, setFilter] = useState('')
+  const api_key = import.meta.env.VITE_WEATHER_API_KEY
 
   const hook = () => {
     countryService

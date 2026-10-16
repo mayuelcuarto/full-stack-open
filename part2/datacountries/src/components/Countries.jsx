@@ -1,4 +1,5 @@
 import Country from "./Country"
+import Weather from "./Weather"
 
 const Countries = ({countriesToShow, handleShow}) => {
   if (countriesToShow.length > 10) {
@@ -18,6 +19,8 @@ const Countries = ({countriesToShow, handleShow}) => {
                 ))}
               </ul>
               <img src={country.flags.png} />
+
+              <Weather capital={country.capital} />
           </div>
   }
 

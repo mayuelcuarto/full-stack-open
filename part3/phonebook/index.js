@@ -25,7 +25,20 @@ let persons = [
     }
 ]
 
-const requestLogger = morgan('tiny')
+morgan.token('body', (req) => {
+  return JSON.stringify(req.body)
+})
+
+const requestLogger = morgan(function (tokens, req, res) {
+  return [
+    tokens.method(req, res),
+    tokens.url(req, res),
+    tokens.status(req, res),
+    tokens.res(req, res, 'content-length'), '-',
+    tokens['response-time'](req, res), 'ms',
+    tokens.body(req)
+  ].join(' ')
+})
 
 app.use(express.json())
 app.use(requestLogger)

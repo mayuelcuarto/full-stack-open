@@ -9,7 +9,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+    "test": "echo \\\"Error: no test specified\\\" && exit 1",
+    "build:ui": "node -e \"fs.rmSync('dist', { recursive: true, force: true })\" && cd ../../part2/phonebook && npm run build && node -e \"const fs = require('fs'); fs.cpSync('dist', '../../part3/phonebook/dist', { recursive: true });\"",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
   },
   "dependencies": {
     "express": "^5.3.0",

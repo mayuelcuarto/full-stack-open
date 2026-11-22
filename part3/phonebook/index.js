@@ -1,6 +1,8 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
+const Person = require('./models/person.js')
 
 let persons = [
     { 
@@ -45,28 +47,36 @@ app.use(requestLogger)
 app.use(express.static('dist'))
 
 app.get('/api/persons', (request, response) => {
-  response.json(persons)
+  Person.find({}).then(people => {
+    response.json(people)
+  })
 })
 
 app.get('/info', (request, response) => {
     const fecha = new Date()
-    response.send(`
-        <p>Phonebook has info for ${persons.length} people</p>
+    Person.find({}).then(people => {
+      response.send(`
+        <p>Phonebook has info for ${people.length} people</p>
         <p>${fecha}</p>
-    `)
+      `)
+    })
 })
 
 app.get('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
-  const person = persons.find(person => {
-    return person.id === id
-  })
-
-  if (person) {
+  const id = request.params.id
+  Person.find({'_id': id}).then(person => {
+    if (person.length === 0) {
+      return response.status(404).json({ error: 'Person not found' })
+    }
     response.json(person)
-  } else {
-    response.status(404).end()
-  }
+  })
+  .catch(error => {
+    console.error(error)
+    if (error.name === 'CastError') {
+      return response.status(400).json({ error: 'Malformatted id' })
+    }
+    response.status(500).json({ error: 'Internal server error' })
+  })
 })
 
 app.delete('/api/persons/:id', (request, response) => {
